@@ -19,7 +19,7 @@
         margin-bottom: 10px;
         text-align: left; /* Left align the text of labels */
     }
-    input[type="number"] {
+    input[type="text"] {
         width: calc(100% - 160px); /* Adjusted width to fit beside label */
         padding: 8px;
         margin-bottom: 10px;
@@ -29,44 +29,47 @@
 </head>
 <body>
 
-<h1>The Weight Loss Calculator</h1>
+<h1><title>The Weight Loss Calculator</title></h1>
 <img src="fruits.jpg" alt="Fitness Image" width="400">
 
 <form id="caloriesForm">
     <label for="runningHours">Hours spent running:</label>
-    <input type="number" id="runningHours" name="runningHours" required><br>
+    <input type="text" id="runningHours" name="runningHours" required><br>
 
     <label for="cyclingHours">Hours spent cycling:</label>
-    <input type="number" id="cyclingHours" name="cyclingHours" required><br>
+    <input type="text" id="cyclingHours" name="cyclingHours" required><br>
 
     <label for="walkingHours">Hours spent walking:</label>
-    <input type="number" id="walkingHours" name="walkingHours" required><br>
+    <input type="text" id="walkingHours" name="walkingHours" required><br>
 
     <input type="submit" value="Calculate">
     <input type="reset" value="Reset">
 </form>
 
-<div id="result"></div>
-
 <script>
-document.getElementById("caloriesForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    var runningHours = parseFloat(document.getElementById("runningHours").value);
-    var cyclingHours = parseFloat(document.getElementById("cyclingHours").value);
-    var walkingHours = parseFloat(document.getElementById("walkingHours").value);
-
-    if (isNaN(runningHours) || isNaN(cyclingHours) || isNaN(walkingHours)) {
-        alert("Please enter valid numbers for all activities.");
-        return;
-    }
-
-    var totalCaloriesBurned = (runningHours * 185) + (cyclingHours * 225) + (walkingHours * 164);
-    var kilogramsLost = totalCaloriesBurned / 3800;
-
-    document.getElementById("result").innerHTML = "You have worked off approximately " + kilogramsLost.toFixed(2) + " kilograms.";
-});
-</script>
+    var alertShown = false; // Variable to track if alert has been shown
+    
+    document.getElementById("caloriesForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        var runningHours = parseFloat(document.getElementById("runningHours").value);
+        var cyclingHours = parseFloat(document.getElementById("cyclingHours").value);
+        var walkingHours = parseFloat(document.getElementById("walkingHours").value);
+    
+        if (isNaN(runningHours) || isNaN(cyclingHours) || isNaN(walkingHours) || runningHours === 0 || cyclingHours === 0 || walkingHours === 0) {
+            if (!alertShown) {
+                alert("Please enter valid numbers for all activities.");
+                alertShown = true; // Set alertShown to true to prevent additional alerts
+            }
+            return;
+        }
+    
+        var totalCaloriesBurned = (runningHours * 185) + (cyclingHours * 225) + (walkingHours * 164);
+        var kilogramsLost = totalCaloriesBurned / 3800;
+    
+        alert("Tnank you for using the Weight Loss Webisite. \n Number of calories burned is "+ totalCaloriesBurned.toFixed(2)+"\nNumber of killograms worked off is " + kilogramsLost.toFixed(2));
+    });
+    </script>
 
 </body>
 </html>
