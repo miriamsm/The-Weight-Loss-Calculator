@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weight Lose Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center; /* Center align the content */
+    }
+    form {
+        margin: 20px auto;
+        width: 300px;
+    }
+    label {
+        display: inline-block;
+        width: 150px;
+        margin-bottom: 10px;
+        text-align: left; /* Left align the text of labels */
+    }
+    input[type="number"] {
+        width: calc(100% - 160px); /* Adjusted width to fit beside label */
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+
+<h1>The Weight Lose Calculator</h1>
+<img src="fruits.jpg" alt="Fitness Image" width="400">
+
+<form id="caloriesForm">
+    <label for="runningHours">Hours spent running:</label>
+    <input type="number" id="runningHours" name="runningHours" required><br>
+
+    <label for="cyclingHours">Hours spent cycling:</label>
+    <input type="number" id="cyclingHours" name="cyclingHours" required><br>
+
+    <label for="walkingHours">Hours spent walking:</label>
+    <input type="number" id="walkingHours" name="walkingHours" required><br>
+
+    <input type="submit" value="Calculate">
+    <input type="reset" value="Reset">
+</form>
+
+<div id="result"></div>
+
+<script>
+document.getElementById("caloriesForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var runningHours = parseFloat(document.getElementById("runningHours").value);
+    var cyclingHours = parseFloat(document.getElementById("cyclingHours").value);
+    var walkingHours = parseFloat(document.getElementById("walkingHours").value);
+
+    if (isNaN(runningHours) || isNaN(cyclingHours) || isNaN(walkingHours)) {
+        alert("Please enter valid numbers for all activities.");
+        return;
+    }
+
+    var totalCaloriesBurned = (runningHours * 185) + (cyclingHours * 225) + (walkingHours * 164);
+    var kilogramsLost = totalCaloriesBurned / 3800;
+
+    document.getElementById("result").innerHTML = "You have worked off approximately " + kilogramsLost.toFixed(2) + " kilograms.";
+});
+</script>
+
+</body>
+</html>
