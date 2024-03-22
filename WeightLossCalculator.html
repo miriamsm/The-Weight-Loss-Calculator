@@ -33,14 +33,14 @@
 <img src="fruits.jpg" alt="Fitness Image" width="400">
 
 <form id="caloriesForm">
-    <label for="runningHours">Hours spent running:</label>
-    <input type="text" id="runningHours" name="runningHours" required><br>
+    <label for="runningHours">Enter Number Of Hours running:</label>
+    <input type="text" id="runningHours" name="runningHours" ><br>
 
-    <label for="cyclingHours">Hours spent cycling:</label>
-    <input type="text" id="cyclingHours" name="cyclingHours" required><br>
+    <label for="cyclingHours">Enter Number Of Hours cycling:</label>
+    <input type="text" id="cyclingHours" name="cyclingHours" ><br>
 
-    <label for="walkingHours">Hours spent walking:</label>
-    <input type="text" id="walkingHours" name="walkingHours" required><br>
+    <label for="walkingHours">Enter Number Of Hours walking:</label>
+    <input type="text" id="walkingHours" name="walkingHours" ><br>
 
     <input type="submit" value="Calculate">
     <input type="reset" value="Reset">
@@ -55,15 +55,11 @@
         var runningHours = parseFloat(document.getElementById("runningHours").value);
         var cyclingHours = parseFloat(document.getElementById("cyclingHours").value);
         var walkingHours = parseFloat(document.getElementById("walkingHours").value);
-    
+
         if (isNaN(runningHours) || isNaN(cyclingHours) || isNaN(walkingHours) || runningHours === 0 || cyclingHours === 0 || walkingHours === 0) {
-            if (!alertShown) {
-                alert("Please enter valid numbers for all activities.");
-                alertShown = true; // Set alertShown to true to prevent additional alerts
-            }
-            return;
-        }
-    
+        alert("Your entered values are incomplete, please try again.");
+        return;
+    }
         var totalCaloriesBurned = (runningHours * 185) + (cyclingHours * 225) + (walkingHours * 164);
         var kilogramsLost = totalCaloriesBurned / 3800;
     
